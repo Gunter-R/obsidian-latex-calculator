@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-latex-calculator-plugin",
 	"name": "Latex Calculator",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "Calculate latex expressions using sympy",
 	"author": "Gunter-R",
