@@ -11,32 +11,74 @@ export default class LatexSympyCalculatorPlugin extends Plugin {
 		this.pythonServer = await child.spawn('python3', [this.getServerPath()]);
 
 		this.addCommand({
-			id: 'calculate-latex',
-			name: 'Calculate latex expression',
+			id: 'replace',
+			name: 'Replace',
+			hotkeys: [
+				{
+					key: "R",
+					modifiers: ["Ctrl", "Shift", "Alt"]
+				}
+			],
 			editorCallback: this.calculatorFactory(ServerOption.Latex),
+		});
+
+		this.addCommand({
+			id: 'equals',
+			name: 'Equals',
+			hotkeys: [
+				{
+					key: "E",
+					modifiers: ["Ctrl", "Shift", "Alt"]
+				}
+			],
+			editorCallback: this.calculatorFactory(ServerOption.Latex, false),
 		});
 
 		this.addCommand({
 			id: 'factor',
 			name: 'Factor',
+			hotkeys: [
+				{
+					key: "F",
+					modifiers: ["Ctrl", "Shift", "Alt"]
+				}
+			],
 			editorCallback: this.calculatorFactory(ServerOption.Factor),
 		});
 
 		this.addCommand({
-			id: 'Numerical',
+			id: 'numerical',
 			name: 'Numerical',
+			hotkeys: [
+				{
+					key: "N",
+					modifiers: ["Ctrl", "Shift", "Alt"]
+				}
+			],
 			editorCallback: this.calculatorFactory(ServerOption.Numerical),
 		});
 
 		this.addCommand({
 			id: 'expand',
 			name: 'Expand',
+			hotkeys: [
+				{
+					key: "X",
+					modifiers: ["Ctrl", "Shift", "Alt"]
+				}
+			],
 			editorCallback: this.calculatorFactory(ServerOption.Expand),
 		});
 
 		this.addCommand({
-			id: 'get-matrix-raw-echelon-form',
-			name: 'Get matrix raw echelon form',
+			id: 'matrix-raw-echelon-form',
+			name: 'Matrix raw echelon form',
+			hotkeys: [
+				{
+					key: "T",
+					modifiers: ["Ctrl", "Shift", "Alt"]
+				}
+			],
 			editorCallback: this.calculatorFactory(ServerOption.MatrixRawEchelonForm),
 		});
 	}
@@ -45,10 +87,12 @@ export default class LatexSympyCalculatorPlugin extends Plugin {
 		this.pythonServer.kill('SIGINT');
 	}
 
-	calculatorFactory(option: ServerOption) {
+	calculatorFactory(option: ServerOption, replace = true) {
 		return (editor: Editor, view: MarkdownView) => {
 			post(editor.getSelection(), option,
-				(data: string) => editor.replaceSelection(data),
+				(data: string) => {
+				editor.replaceSelection((replace ? "" : editor.getSelection() + " = ") + data);
+				},
 				(err) => new Notice(err));
 		}
 	}
