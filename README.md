@@ -1,95 +1,154 @@
-# Obsidian Sample Plugin
+# Latex Sympy Calculator
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+## About
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+`Latex Sympy Calculator` parses **LaTeX math expressions** and converts it into the equivalent **SymPy form**. Then, **calculate it** and convert to latex result. 
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+It is designed for providing **people writing in latex or markdown** a ability to calculate something when writing math expression. It is based on `Python`, `Sympy` and [`latex2sympy2`](https://github.com/OrangeX4/latex2sympy) module.
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+PS: If you want to install the extension, **PLEASE READ THE INSTALL DESCRIPTION!**
 
-## First time developing plugins?
+![](./Images/latex2sympy.gif)
 
-Quick starting guide for new plugin devs:
+## Features
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+* **Arithmetic:** Add (+), Sub (-), Dot Mul (·), Cross Mul (×), Frac (/), Power (^), Abs (|x|), Sqrt (√), etc...
+* **Alphabet:** a - z, A - Z, α - ω, Subscript (x_1), Accent Bar(ā), etc...
+* **Common Functions:** gcd, lcm, floor, ceil, max, min, log, ln, exp, sin, cos, tan, csc, sec, cot, arcsin, sinh, arsinh, etc...
+* **Funcion Symbol:** f(x), f(x-1,), g(x,y), etc...
+* **Calculous:** Limit ($lim_{n\to\infty}$), Derivation ($\frac{d}{dx}(x^2+x)$), Integration ($\int xdx$), etc...
+* **Linear Algebra:** Matrix to raw echelon form, Determinant, Transpose, Inverse, Elementary Transformation, etc...
+* **Other:** Binomial...
 
-## Releasing new releases
+## Install
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+**IT IS IMPORTANT!**  
+**IT IS IMPORTANT!**  
+**IT IS IMPORTANT!**  
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+Before you use the extension, please install python and two python modules: `latex2sympy` and `Flask`.
 
-## Adding your plugin to the community plugin list
+Install **Python** in [Python.org](https://www.python.org/), and then install **NECESSARY modules** by running:
 
-- Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
-
-## How to use
-
-- Clone this repo.
-- `npm i` or `yarn` to install dependencies
-- `npm run dev` to start compilation in watch mode.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
+```
+pip install latex2sympy2
+pip install Flask
 ```
 
-If you have multiple URLs, you can also do:
+If you have installed it, you can run the code in terminal to test if you have installed it successfully.
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
+```
+python
+
+# Get into python environment
+import latex2sympy2
+import flask
 ```
 
-## API Documentation
+If you want to use this extension in `Remote - SSH` or `Remote - WSL`, please **uninstall the original extension** and reinstall it in the remote server.
 
-See https://github.com/obsidianmd/obsidian-api
+## Usage
+
+![](./Images/latex2sympy.gif)
+
+### Latex to Latex
+
+You can **SELECT** some text, and press `Shift + Ctrl + Alt + E` (equal) to get the result of the selected Latex text. It will be like:
+
+``` latex
+# Before
+\frac{d}{dx}(x^3+x^2+1)
+
+# After
+\frac{d}{dx}(x^3+x^2+1) = x (3 x + 2) 
+```
+
+You can **SELECT** some text, and press `Shift + Ctrl + Alt + R` (replace) to get the result of the selected Latex text. It will be like:
+
+``` latex
+# Before
+\frac{d}{dx}(x^3+x^2+1)
+
+# After
+x (3 x + 2) 
+```
+
+### Factor and Expand
+
+You can **SELECT** some text, and press `Shift + Ctrl + Alt + F` (factor) to get the factor of the selected Latex text. It will be like:
+
+``` latex
+# Before
+x^{2} + 2 x y + y^{2}
+
+# After
+(x + y)^{2}
+```
+
+If you are using **windows**, the shortcut `Shift + Ctrl + Alt + F` may be invalid, you can set another shortcut for it.
+
+You can **SELECT** some text, and press `Shift + Ctrl + Alt + X` (expand) to get the expand of the selected Latex text. It will be like:
+
+``` latex
+# Before
+(x + y)^{2}
+
+# After
+x^{2} + 2 x y + y^{2}
+```
+
+### Latex to Numerical Result
+
+You can **SELECT** some text, and press `Shift + Ctrl + Alt + N` (numerical) to get the numerical result of the selected Latex text. It will be like:
+
+``` latex
+# Before
+\sqrt{2}
+
+# After
+1.41421356237310
+```
+
+### Solve Equation
+
+``` latex
+# Before
+x + y = 1
+
+# After
+[ y = 1 - x, \  x = 1 - y]
+```
+
+### Eval At
+
+``` latex
+# Before
+(x+2)|_{x=y+1}
+
+# After
+y + 3
+```
+
+### Matrix to raw echelon form
+
+You can **SELECT** matrix, then press `Shift + Ctrl + Alt + T` to transform it to raw echelon form in one action
+``` latex
+# Before
+\begin{bmatrix}
+    1 & 2 & 3\\
+    4 & 5 & 6\\
+    7 & 8 & 9
+\end{bmatrix}
+
+# After 
+\begin{bmatrix}
+    1 & 2 & 3\\
+    4 & 5 & 6\\
+    7 & 8 & 9
+\end{bmatrix} \to \begin{bmatrix}1 & 0 & -1\\0 & 1 & 2\\0 & 0 & 0\end{bmatrix}
+```
+<img src="./Images/matrix-transformation-example.png" width="200">
+
+## License
+
+This project is licensed under the MIT License.
