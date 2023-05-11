@@ -2,7 +2,7 @@
 
 ## About
 
-(This is a port of a VS code plugin. Big thanks to the author of the original [plugin](https://github.com/OrangeX4/Latex-Sympy-Calculatororiginal)!)
+(This is an [obsidian](https://obsidian.md/) port of a VS code plugin. Big thanks to the author of the original [plugin](https://github.com/OrangeX4/Latex-Sympy-Calculatororiginal)!)
 
 `Latex Sympy Calculator` parses **LaTeX math expressions** and converts it into the equivalent **SymPy form**. Then, **calculate it** and convert to latex result. 
 
