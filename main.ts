@@ -1,4 +1,4 @@
-import {App, Editor, FileSystemAdapter, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting} from 'obsidian';
+import {Editor, FileSystemAdapter, MarkdownView, Notice, Plugin} from 'obsidian';
 import * as child from 'child_process';
 import * as http from "http";
 import * as path from "path";
@@ -91,9 +91,9 @@ export default class LatexSympyCalculatorPlugin extends Plugin {
 		return (editor: Editor, view: MarkdownView) => {
 			post(editor.getSelection(), option,
 				(data: string) => {
-				editor.replaceSelection((replace ? "" : editor.getSelection() + " = ") + data);
+					editor.replaceSelection((replace ? "" : editor.getSelection() + " = ") + data);
 				},
-				(err) => new Notice(err));
+				(err: string) => new Notice(err));
 		}
 	}
 
@@ -109,7 +109,7 @@ export default class LatexSympyCalculatorPlugin extends Plugin {
 
 enum ServerOption {
 	Latex = '/latex',
-	MatrixRawEchelonForm ='/matrix-raw-echelon-form',
+	MatrixRawEchelonForm = '/matrix-raw-echelon-form',
 	Factor = '/factor',
 	Numerical = '/numerical',
 	Expand = '/expand',
